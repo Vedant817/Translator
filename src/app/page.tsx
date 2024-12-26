@@ -29,6 +29,17 @@ export default function Home() {
     setInputText(newText);
   }
 
+  const handleInputSet = async (value: string) => {
+    setInputText(value);
+
+    const formData = new FormData();
+    formData.append("text", value);
+    formData.append("languageTo", languageTo);
+    formData.append("languageFrom", languageFrom);
+    const translation = await translate(formData);
+    setTranslatedText(translation.translation);
+  }
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -48,7 +59,7 @@ export default function Home() {
           </div>
           <div className="flex flex-row items-center gap-2 mt-3 py-4 h-16">
           <button type="submit" className="p-2 rounded-md bg-slate-800">Translate</button>
-          {languageFrom === 'en' && <VoiceRecorder />}
+          {languageFrom === 'en' && <VoiceRecorder handleSetText={handleInputSet} />}
           </div>
         </form>
       </main>
