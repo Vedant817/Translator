@@ -53,12 +53,11 @@ export default function Home() {
     formData.append('text', inputText);
     formData.append('languageTo', languageTo);
     formData.append('languageFrom', languageFrom);
-    console.log(formData);
 
     const result = await translate(formData);
     setTranslatedText(result.translation);
 
-    if(isSaved){
+    if (isSaved) {
       setIsSaved(false);
     }
   }
