@@ -11,6 +11,13 @@ export async function POST (request: NextRequest) {
         return Response.json({error: 'Unable to get the audio file.'})
     }
 
+    const base64Audio = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result?.toString().split(',')[1] || '');
+        reader.onerror = (err) => reject(err);
+        reader.readAsDataURL(audioFile);
+    });
+
     const genAI = new GoogleGenerativeAI(API_Key);
     const model = genAI.getGenerativeModel({
         model: 'gemini-1.5-flash'
@@ -21,14 +28,14 @@ export async function POST (request: NextRequest) {
             {
                 inlineData: {
                     mimeType: 'audio/wav',
-                    data: audioFile
+                    data: base64Audio
                 }
             },
             {text: 'Please transcribe the the audio.'}
         ])
     
         return Response.json({result: result.response.text()});
-    } catch (error: any) {
+    } catch (error) {
         return Response.json({error});
     }
 }
