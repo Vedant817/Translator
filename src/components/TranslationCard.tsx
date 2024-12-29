@@ -19,7 +19,7 @@ export default function TranslationCard({ group }: { group: TranslationGroup }) 
     const { source_language, target_language, souce_text = [], translated_texts = [] } = group;
 
     const sourceFlag = languageToCountry[source_language] || "🏴";
-    const targetFlag = languageToCountry[target_language] || "🏴";
+    // const targetFlag = languageToCountry[target_language] || "🏴";
 
     return (
         <div className="bg-white rounded-lg shadow-md p-4 h-full flex flex-col text-black">

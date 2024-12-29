@@ -1,5 +1,4 @@
 'use client';
-import { useUser } from "@clerk/nextjs";
 import { Bookmark } from "lucide-react";
 import { saveTranslations } from "@/app/actions/saveTranlates";
 
@@ -13,7 +12,6 @@ interface SaveButtonProps {
 }
 
 export default function SaveButton({sourceLan, targetLan, sourceText, translatedText, onHandleSave, isSaved}: SaveButtonProps) {
-    const { isLoaded, isSignedIn, user } = useUser();
     const btnClasses = isSaved ? 'fill-yellow-500' : ''
 
     return (

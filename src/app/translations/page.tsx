@@ -18,13 +18,19 @@ async function getData(userId: string) {
     GROUP BY source_language, target_language
   `;
 
-  return response
+  // return response.map(row => ({
+  //   source_language: row.source_language,
+  //   target_language: row.target_language,
+  //   souce_text: row.source_text,
+  //   translated_texts: row.translated_texts,
+  // }))
+  return response;
 }
 
 export default async function Page() {
   const { userId } = await auth();
 
-  if(!userId){
+  if (!userId) {
     return <p>Unagle to find the user_id.</p>
   }
 
