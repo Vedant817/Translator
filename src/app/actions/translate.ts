@@ -28,7 +28,7 @@ async function translateText({ text, targetLanguage, languageFrom = "" }: transl
     
         return result.response.text();
     } catch (error) {
-        throw new Error('Failed to translate the text');
+        throw new Error(`Failed to translate the text: ${error}`);
     }
 }
 
